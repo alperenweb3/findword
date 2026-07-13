@@ -32,3 +32,20 @@ The custom Node server hosts Next.js and Socket.IO together. TDK lookups are per
 - `npm run format` — format source files with Prettier and the Prisma schema with Prisma's formatter
 - `npm run format:check` — verify source formatting without changing files
 - `npm run db:push` — synchronize the Prisma schema
+
+## Railway deployment
+
+Prisma Postgres hosts only the database; Railway hosts the application. Copy the pooled PostgreSQL connection string from Prisma Console into the Railway application service's `DATABASE_URL` variable.
+
+Add these variables under the Railway service's **Variables** tab:
+
+```text
+DATABASE_URL=postgres://...value copied from Prisma Console...
+AUTH_SECRET=...output of openssl rand -base64 32...
+AUTH_URL=https://${{RAILWAY_PUBLIC_DOMAIN}}
+TDK_API_URL=https://sozluk.gov.tr/gts_id
+```
+
+Do not add quotes, do not expose these variables with a `NEXT_PUBLIC_` prefix, and never commit their real values. Railway supplies `PORT` and `RAILWAY_PUBLIC_DOMAIN` automatically. Generate a public domain under the service's **Settings → Networking** section, then deploy the staged variable changes.
+
+The checked-in `railway.json` selects the Dockerfile, synchronizes the Prisma schema before deployment, health-checks `/`, and restarts failed containers. Keep the service at one replica because active realtime games use in-process state.
