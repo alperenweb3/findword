@@ -1,0 +1,96 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum GameMode {
+  SOLO
+  MULTIPLAYER
+}
+
+enum Difficulty {
+  EASY
+  MEDIUM
+  HARD
+}
+
+enum GameStatus {
+  WAITING
+  PLAYING
+  ENDED
+}
+
+enum EndReason {
+  TIMEOUT
+  FORFEIT
+  DISCONNECT
+}
+
+model User {
+  id           String            @id @default(cuid())
+  email        String            @unique
+  passwordHash String
+  displayName  String
+  createdAt    DateTime          @default(now())
+  participants GameParticipant[]
+}
+
+model Game {
+  id           String            @id
+  roomCode     String?           @unique
+  mode         GameMode
+  difficulty   Difficulty
+  status       GameStatus        @default(WAITING)
+  winnerId     String?
+  endReason    EndReason?
+  createdAt    DateTime          @default(now())
+  startedAt    DateTime?
+  endedAt      DateTime?
+  state        Json?
+  participants GameParticipant[]
+  submissions  WordSubmission[]
+
+  @@index([status, createdAt])
+  @@index([mode, difficulty, endedAt])
+}
+
+model GameParticipant {
+  id           String           @id @default(cuid())
+  gameId       String
+  game         Game             @relation(fields: [gameId], references: [id], onDelete: Cascade)
+  userId       String?
+  user         User?            @relation(fields: [userId], references: [id], onDelete: SetNull)
+  playerKey    String
+  displayName  String
+  seat         Int
+  score        Int              @default(0)
+  pauseUsed    Boolean          @default(false)
+  pauseSeconds Int              @default(0)
+  won          Boolean?
+  joinedAt     DateTime         @default(now())
+  submissions  WordSubmission[]
+
+  @@unique([gameId, playerKey])
+  @@index([userId, gameId])
+}
+
+model WordSubmission {
+  id             String          @id @default(cuid())
+  gameId         String
+  game           Game            @relation(fields: [gameId], references: [id], onDelete: Cascade)
+  participantId  String
+  participant    GameParticipant @relation(fields: [participantId], references: [id], onDelete: Cascade)
+  turnNumber     Int
+  word           String
+  normalizedWord String
+  points         Int
+  remainingMs    Int
+  createdAt      DateTime        @default(now())
+
+  @@unique([gameId, turnNumber])
+  @@index([gameId, createdAt])
+}

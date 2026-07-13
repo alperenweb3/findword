@@ -1,0 +1,625 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:ital,wght@0,700;1,700&display=swap");
+
+:root {
+  --ink: #17231d;
+  --cream: #f5f0e5;
+  --paper: #fffdf8;
+  --green: #1e6448;
+  --lime: #d8ed88;
+  --orange: #ef7c45;
+  --line: #d8d7cc;
+  --muted: #6f756f;
+}
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  color: var(--ink);
+  background: var(--cream);
+  font-family: "DM Sans", sans-serif;
+}
+button,
+input,
+select {
+  font: inherit;
+}
+button {
+  cursor: pointer;
+}
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.48;
+}
+.shell,
+.gameShell,
+.contentPage {
+  width: min(1120px, calc(100% - 36px));
+  margin: auto;
+}
+.nav,
+.gameHeader {
+  height: 84px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--line);
+}
+.brand {
+  background: none;
+  border: 0;
+  color: var(--ink);
+  font-size: 18px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.brand span,
+.brandMark {
+  width: 36px;
+  height: 36px;
+  border-radius: 50% 50% 50% 8px;
+  background: var(--green);
+  color: white;
+  display: grid;
+  place-items: center;
+  font-family: "Fraunces";
+}
+.navActions {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+.textButton {
+  border: 0;
+  background: none;
+  font-weight: 600;
+  color: var(--ink);
+}
+.outline,
+.dark,
+.primary {
+  border: 0;
+  border-radius: 10px;
+  padding: 13px 22px;
+  font-weight: 700;
+}
+.outline {
+  background: transparent;
+  border: 1px solid var(--ink);
+}
+.outline.small {
+  padding: 8px 15px;
+}
+.dark {
+  background: var(--ink);
+  color: white;
+}
+.primary {
+  background: var(--green);
+  color: white;
+}
+.hero {
+  text-align: center;
+  padding: 70px 20px 42px;
+}
+.eyebrow {
+  color: var(--green);
+  letter-spacing: 0.16em;
+  font-size: 12px;
+  font-weight: 700;
+}
+.hero h1,
+.contentPage > h1,
+.resultPage h1 {
+  font: 700 clamp(44px, 7vw, 78px)/0.98 "Fraunces";
+  margin: 18px 0;
+  letter-spacing: -0.04em;
+}
+.hero h1 em {
+  color: var(--green);
+}
+.hero p {
+  max-width: 620px;
+  margin: auto;
+  color: var(--muted);
+  font-size: 18px;
+  line-height: 1.6;
+}
+.setupCard {
+  width: min(780px, 100%);
+  margin: auto;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  padding: 30px;
+  box-shadow: 0 18px 60px #293a2814;
+}
+.field > span,
+.authCard label > span {
+  display: block;
+  font-size: 12px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+.field input,
+.joinRow input,
+.authCard input,
+.wordForm input,
+select {
+  border: 1px solid var(--line);
+  background: white;
+  border-radius: 10px;
+  padding: 13px 15px;
+  outline: none;
+}
+.field input:focus,
+.joinRow input:focus,
+.authCard input:focus,
+.wordForm input:focus {
+  border-color: var(--green);
+  box-shadow: 0 0 0 3px #1e64481f;
+}
+.wide {
+  display: block;
+  margin-bottom: 22px;
+}
+.wide > input {
+  width: 100%;
+}
+.segmented {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 4px;
+}
+.segmented button {
+  border: 0;
+  background: none;
+  border-radius: 8px;
+  padding: 10px;
+  font-weight: 700;
+}
+.segmented button small {
+  display: block;
+  font-weight: 400;
+  color: var(--muted);
+}
+.segmented .active {
+  background: var(--ink);
+  color: white;
+}
+.segmented .active small {
+  color: #ccd3ce;
+}
+.modeGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+.modeCard {
+  border: 0;
+  border-radius: 15px;
+  padding: 23px;
+  text-align: left;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 3px 14px;
+}
+.modeCard.solo {
+  background: var(--lime);
+}
+.modeCard.multi {
+  background: #dbe9e2;
+}
+.modeIcon {
+  grid-row: 1/4;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #ffffff8c;
+  display: grid;
+  place-items: center;
+  font-size: 20px;
+}
+.modeCard strong {
+  font-size: 18px;
+}
+.modeCard small {
+  color: #45524a;
+}
+.modeCard b {
+  margin-top: 12px;
+  font-size: 13px;
+}
+.joinRow {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-top: 18px;
+  padding-top: 18px;
+  border-top: 1px solid var(--line);
+}
+.joinRow span {
+  margin-right: auto;
+  color: var(--muted);
+}
+.joinRow input {
+  width: 120px;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  font-weight: 700;
+}
+.rules {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  padding: 70px 0 90px;
+}
+.rules article {
+  border-top: 1px solid var(--line);
+  padding-top: 18px;
+}
+.rules b {
+  color: var(--orange);
+}
+.rules h3 {
+  margin: 13px 0 6px;
+}
+.rules p {
+  color: var(--muted);
+  line-height: 1.5;
+  margin: 0;
+}
+.error {
+  color: #ae3826;
+  font-weight: 600;
+  text-align: center;
+}
+.gameShell {
+  min-height: 100vh;
+}
+.roomBadge,
+.difficultyBadge {
+  display: inline-block;
+  padding: 7px 10px;
+  border-radius: 6px;
+  background: #e5e2d8;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+}
+.difficultyBadge {
+  background: var(--lime);
+}
+.scoreBoard {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin: 28px 0;
+}
+.scoreBoard article {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 17px;
+}
+.scoreBoard article.current {
+  border-color: var(--green);
+  box-shadow: inset 4px 0 var(--green);
+}
+.scoreBoard article > b {
+  margin-left: auto;
+  font-size: 26px;
+}
+.scoreBoard article > b small {
+  display: block;
+  font-size: 9px;
+  text-align: right;
+  color: var(--muted);
+}
+.scoreBoard article div > small {
+  display: block;
+  color: var(--muted);
+  margin-top: 3px;
+}
+.avatar {
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--lime);
+  font-weight: 700;
+}
+.waiting span {
+  font-size: 22px;
+  letter-spacing: 0.1em;
+}
+.waitingPanel,
+.playArea {
+  text-align: center;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  padding: 46px 25px;
+}
+.waitingPanel p {
+  color: var(--muted);
+  max-width: 480px;
+  margin: 10px auto 26px;
+}
+.pulse {
+  font: 700 38px "Fraunces";
+  letter-spacing: 0.15em;
+  color: var(--green);
+}
+.playArea {
+  position: relative;
+}
+.timer {
+  width: 92px;
+  height: 92px;
+  margin: 0 auto 15px;
+  border: 7px solid var(--lime);
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.timer span {
+  font-size: 34px;
+  font-weight: 700;
+  line-height: 1;
+}
+.timer small {
+  font-size: 8px;
+  font-weight: 700;
+}
+.timer.danger {
+  border-color: #f3a18a;
+  color: #b23e28;
+}
+.turnLabel {
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  font-weight: 700;
+  color: var(--green);
+}
+.playArea h2 {
+  font: 700 clamp(27px, 4vw, 43px) "Fraunces";
+  margin: 10px 0 25px;
+}
+.playArea h2 em {
+  font-style: normal;
+  color: var(--green);
+  font-size: 1.3em;
+}
+.wordForm {
+  display: flex;
+  max-width: 600px;
+  margin: auto;
+  gap: 10px;
+}
+.wordForm input {
+  flex: 1;
+  font-size: 18px;
+}
+.pauseButton {
+  margin-top: 20px;
+  border: 0;
+  background: none;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 600;
+}
+.wordHistory {
+  padding: 28px 0 70px;
+}
+.wordHistory h3 {
+  display: flex;
+  justify-content: space-between;
+}
+.wordHistory h3 span {
+  font-size: 13px;
+  color: var(--muted);
+  font-weight: 500;
+}
+.wordHistory > div {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.wordHistory > div > span {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  padding: 8px 12px;
+  border-radius: 8px;
+}
+.wordHistory > div > span small {
+  color: var(--green);
+  font-weight: 700;
+  margin-left: 7px;
+}
+.wordHistory p {
+  color: var(--muted);
+}
+.resultPage {
+  text-align: center;
+  padding: 90px 0;
+}
+.resultMark {
+  width: 80px;
+  height: 80px;
+  margin: auto;
+  border-radius: 50%;
+  background: var(--lime);
+  display: grid;
+  place-items: center;
+  font-size: 36px;
+}
+.resultPage h1 {
+  font-size: 58px;
+}
+.resultPage > p {
+  color: var(--muted);
+}
+.resultScores {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin: 40px 0;
+}
+.resultScores > div {
+  min-width: 190px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 20px;
+}
+.resultScores span,
+.resultScores small {
+  display: block;
+}
+.resultScores strong {
+  display: block;
+  font-size: 42px;
+  margin: 8px;
+}
+.resultScores small {
+  color: var(--muted);
+}
+.centerPage,
+.contentPage {
+  min-height: 100vh;
+  padding: 40px 0;
+}
+.back {
+  border: 0;
+  background: none;
+  font-weight: 700;
+}
+.authCard {
+  width: min(430px, calc(100% - 32px));
+  margin: 35px auto;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  padding: 34px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.authCard .brandMark {
+  margin: auto;
+}
+.authCard h1,
+.authCard p {
+  text-align: center;
+  margin: 0;
+}
+.authCard > label input {
+  width: 100%;
+  margin-top: 5px;
+}
+.contentPage > .eyebrow {
+  margin-top: 65px;
+}
+.contentPage > h1 {
+  font-size: 55px;
+}
+.filters {
+  display: flex;
+  gap: 10px;
+  margin: 30px 0;
+}
+.leaderTable {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 15px;
+  overflow: hidden;
+}
+.leaderTable > div {
+  display: grid;
+  grid-template-columns: 70px 1fr 120px 120px;
+  align-items: center;
+  padding: 18px;
+  border-bottom: 1px solid var(--line);
+}
+.leaderTable > div:last-child {
+  border: 0;
+}
+.leaderTable > div span {
+  text-align: right;
+  font-weight: 700;
+}
+.leaderTable > div small {
+  text-align: right;
+  color: var(--muted);
+}
+.leaderTable > p {
+  padding: 30px;
+  text-align: center;
+  color: var(--muted);
+}
+@media (max-width: 700px) {
+  .nav {
+    height: auto;
+    padding: 18px 0;
+  }
+  .navActions {
+    gap: 8px;
+  }
+  .navActions > .textButton:first-child {
+    display: none;
+  }
+  .hero {
+    padding-top: 50px;
+  }
+  .setupCard {
+    padding: 20px;
+  }
+  .modeGrid,
+  .rules,
+  .scoreBoard {
+    grid-template-columns: 1fr;
+  }
+  .joinRow {
+    flex-wrap: wrap;
+  }
+  .joinRow span {
+    width: 100%;
+  }
+  .joinRow input {
+    flex: 1;
+  }
+  .rules {
+    gap: 25px;
+    padding: 50px 0;
+  }
+  .wordForm {
+    flex-direction: column;
+  }
+  .resultScores {
+    flex-direction: column;
+  }
+  .leaderTable > div {
+    grid-template-columns: 45px 1fr 90px;
+  }
+  .leaderTable > div small {
+    display: none;
+  }
+  .filters {
+    flex-wrap: wrap;
+  }
+  .hero h1 {
+    font-size: 48px;
+  }
+}
