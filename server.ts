@@ -13,7 +13,9 @@ import { prisma } from "./src/lib/db";
 import type { GameSnapshot } from "./src/lib/game/types";
 
 const dev = process.env.NODE_ENV !== "production";
-const hostname = process.env.HOSTNAME ?? "0.0.0.0";
+// Docker sets HOSTNAME to the container ID, which is not a routable bind address.
+// Bind to every interface unless an explicit HOST override is provided.
+const hostname = process.env.HOST ?? "0.0.0.0";
 const port = Number(process.env.PORT ?? 3000);
 const app = next({ dev, hostname, port });
 const handle = app.getRequestHandler();
